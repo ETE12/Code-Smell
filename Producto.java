@@ -1,16 +1,28 @@
 
 class Producto {
-    String nombre;
-    double precio;
-    String categoria;
-    
-    public Producto(String n, double p, String c) {
-        nombre = n;
-        precio = p;
-        categoria = c;
+    private String nombre;
+    private double precio;
+    private Categoria categoria;
+
+    public Producto(String nombre, double precio, Categoria categoria) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.categoria = categoria;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
     }
 
     public void mostrarInfo() {
-        System.out.println("Producto: " + nombre + " | Precio: " + precio + " | Categoría: " + categoria);
+        System.out.println("Producto: " + nombre + " | Precio: $" + precio + " | Categoría: " + categoria);
     }
 }
