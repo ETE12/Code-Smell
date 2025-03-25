@@ -1,29 +1,31 @@
 import java.util.ArrayList;
 
 class CarritoCompras {
-    ArrayList<Producto> productos = new ArrayList<>();
-    double precioTotal = 0;
+    private ArrayList<Producto> productos = new ArrayList<>();
 
     public void agregarProducto(Producto p) {
         productos.add(p);
-        precioTotal += p.precio;
     }
 
     public void eliminarProducto(String nombre) {
-        for (int i = 0; i < productos.size(); i++) {
-            if (productos.get(i).nombre.equals(nombre)) {
-                precioTotal -= productos.get(i).precio;
-                productos.remove(i);
-                break;
-            }
+        productos.removeIf(producto -> producto.getNombre().equalsIgnoreCase(nombre));
+    }
+
+    public double calcularPrecioTotal() {
+        double total = 0;
+        for (Producto producto : productos) {
+            total += producto.getPrecio();
         }
+        return total;
+    }
+
+    public double aplicarDescuento(double total) {
+        return total > 1000 ? total * 0.9 : total;
     }
 
     public void finalizarCompra() {
-        if (precioTotal > 1000) {
-            System.out.println("Aplicando descuento...");
-            precioTotal *= 0.9;
-        }
-        System.out.println("Precio total: " + precioTotal);
+        double total = calcularPrecioTotal();
+        total = aplicarDescuento(total);
+        System.out.println("Precio total final: $" + total);
     }
 }
